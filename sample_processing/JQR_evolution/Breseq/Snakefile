@@ -1,0 +1,83 @@
+#########################################
+# LIEBERMAN LAB SNAKEFILE FOR BRESEQ CREATION   #
+#########################################
+
+# Version History:
+# # 2020.07 Alex: Modified from Lieberman lab case step SM to be applicable for Breseq
+
+## USER defined variables (in theory do not need to be touched)
+spls = "BreSeq_Mass_Production.csv"
+from get_CSV_data import read_samplesCSV
+SCRIPTS_DIRECTORY = "/scratch/mit_lieberman/scripts" #technically not needed for this script, kept in case of updates
+
+
+## pre-snakemake
+import sys, subprocess
+sys.path.insert(0, SCRIPTS_DIRECTORY) #technically not needed for this script, kept in case of updates
+
+
+''' PRE-SNAKEMAKE '''
+## define couple of lists from BreSeq_Mass_Production.csv
+## FORMAT: ExperimentFolder, Sample, AlignmentFolder, Path
+# NOTE: this analysis expects:
+#   - the reference genome to be separately copied into the working folder (in this case: dolosa_genome_02_21_20_download.gbff)
+#   - Sample, the name you wish to refer to a sample by going forward
+#   - Path, the path to a mapping folder, INCLUDING the "/sickle2050/filter_reads_1.fastq" or /nofilter/filter_reads_1.fastq.gz extension
+#   - ExperimentFolder and AlignmentFolder are technically not needed for the snakemake, however they combine to make "Path"
+#   	- ExperimentFolder gave the sample name used in the mapping step (sometimes different than the preferred "Sample" name
+#   	- AlignmentFolder gives the path to the larger directory containing all the mapping ExperimentFolders
+
+[list_Experiment_Folder,list_Sample,list_AlignmentFolder,list_Path] = read_samplesCSV(spls)
+
+''' SNAKEMAKE '''
+
+rule all:
+    input:
+        "breseq_comparison.html",
+        
+rule pre_breseq_make_links:
+    output:
+        expand("link_folder/{samplename}_1.link",zip, samplename=list_Sample),
+        expand("link_folder/{samplename}_2.link",zip, samplename=list_Sample),
+    run:
+        import subprocess
+        for i in range(len(list_Sample)):
+            subprocess.run( "ln -s " + list_Path[i] + "/sickle2050/filter_reads_1.fastq link_folder/" + list_Sample[i] + "_1.link",shell=True)
+            subprocess.run( "ln -s " + list_Path[i] + "/sickle2050/filter_reads_2.fastq link_folder/" + list_Sample[i] + "_2.link",shell=True)
+
+rule run_breseq:
+    input:
+        fastq_1_file = "link_folder/{samplename}_1.link",
+        fastq_2_file = "link_folder/{samplename}_2.link",
+    params:
+        sample = "{samplename}",
+    output:
+        "all_gd_files/{samplename}.gd",
+    shell:
+        """
+        module load c3ddb/R/3.2.3;
+        module load c3ddb/bowtie2/2.2.6;
+        module load c3ddb/breseq/0.30.0;
+        breseq -j 16 -o {params.sample} -r dolosa_genome_02_21_20_download.gbff {input.fastq_1_file} {input.fastq_2_file};
+        cp {params.sample}/output/output.gd {output}
+        rm -fr {params.sample}/output/evidence;
+        rm -fr {params.sample}/01_sequence_conversion;
+        rm -fr {params.sample}/02_reference_alignment;
+        rm -fr {params.sample}/03_candidate_junctions;
+        rm -fr {params.sample}/04_candidate_junction_alignment;
+        rm -fr {params.sample}/05_alignment_correction;
+        rm -fr {params.sample}/06_bam;
+        """
+		
+rule compare_gd:
+    input:
+        expand("all_gd_files/{samplename}.gd",zip, samplename=list_Sample, pathname = list_Path),
+    output:
+        "breseq_comparison.html"
+    shell:
+        """
+        module load c3ddb/R/3.2.3;
+        module load c3ddb/bowtie2/2.2.6;
+        module load c3ddb/breseq/0.30.0;
+        gdtools ANNOTATE -f HTML -o breseq_comparison.html -r dolosa_genome_02_21_20_download.gbff {input};
+        """

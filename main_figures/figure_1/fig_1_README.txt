@@ -1,0 +1,1 @@
+Currently, code needed to reproduce Figure 1 is not included in this repo, as it utilizes protected data that includes infection dates that could identify individual patients. Please contact this paper's authors if you have questions regarding infection and sampling times.  

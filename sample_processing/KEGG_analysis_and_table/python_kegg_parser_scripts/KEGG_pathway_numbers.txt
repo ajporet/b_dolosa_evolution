@@ -1,0 +1,154 @@
+*** Metabolism
+% Global and overview maps
+01100  Metabolic pathways
+01110  Biosynthesis of secondary metabolites
+01120  Microbial metabolism in diverse environments
+01200  Carbon metabolism
+01210  2-Oxocarboxylic acid metabolism
+01212  Fatty acid metabolism
+01230  Biosynthesis of amino acids
+01240  Biosynthesis of cofactors
+01220  Degradation of aromatic compounds
+% Carbohydrate metabolism
+00010  Glycolysis / Gluconeogenesis
+00020  Citrate cycle (TCA cycle)
+00030  Pentose phosphate pathway
+00040  Pentose and glucuronate interconversions
+00051  Fructose and mannose metabolism
+00052  Galactose metabolism
+00053  Ascorbate and aldarate metabolism
+00500  Starch and sucrose metabolism
+00520  Amino sugar and nucleotide sugar metabolism
+00620  Pyruvate metabolism
+00630  Glyoxylate and dicarboxylate metabolism
+00640  Propanoate metabolism
+00650  Butanoate metabolism
+00660  C5-Branched dibasic acid metabolism
+00562  Inositol phosphate metabolism
+% Energy metabolism
+00190  Oxidative phosphorylation
+00710  Carbon fixation in photosynthetic organisms
+00680  Methane metabolism
+00910  Nitrogen metabolism
+00920  Sulfur metabolism
+% Lipid metabolism
+00061  Fatty acid biosynthesis
+00071  Fatty acid degradation
+00072  Synthesis and degradation of ketone bodies
+00100  Steroid biosynthesis
+00561  Glycerolipid metabolism
+00564  Glycerophospholipid metabolism
+00565  Ether lipid metabolism
+00590  Arachidonic acid metabolism
+00592  alpha-Linolenic acid metabolism
+01040  Biosynthesis of unsaturated fatty acids
+% Nucleotide metabolism
+00230  Purine metabolism
+00240  Pyrimidine metabolism
+% Amino acid metabolism
+00250  Alanine, aspartate and glutamate metabolism
+00260  Glycine, serine and threonine metabolism
+00270  Cysteine and methionine metabolism
+00280  Valine, leucine and isoleucine degradation
+00290  Valine, leucine and isoleucine biosynthesis
+00300  Lysine biosynthesis
+00310  Lysine degradation
+00220  Arginine biosynthesis
+00330  Arginine and proline metabolism
+00340  Histidine metabolism
+00350  Tyrosine metabolism
+00360  Phenylalanine metabolism
+00380  Tryptophan metabolism
+00400  Phenylalanine, tyrosine and tryptophan biosynthesis
+% Metabolism of other amino acids
+00410  beta-Alanine metabolism
+00430  Taurine and hypotaurine metabolism
+00440  Phosphonate and phosphinate metabolism
+00450  Selenocompound metabolism
+00460  Cyanoamino acid metabolism
+00471  D-Glutamine and D-glutamate metabolism
+00472  D-Arginine and D-ornithine metabolism
+00473  D-Alanine metabolism
+00480  Glutathione metabolism
+% Glycan biosynthesis and metabolism
+00540  Lipopolysaccharide biosynthesis
+00541  O-Antigen nucleotide sugar biosynthesis
+00550  Peptidoglycan biosynthesis
+00511  Other glycan degradation
+% Metabolism of cofactors and vitamins
+00730  Thiamine metabolism
+00740  Riboflavin metabolism
+00750  Vitamin B6 metabolism
+00760  Nicotinate and nicotinamide metabolism
+00770  Pantothenate and CoA biosynthesis
+00780  Biotin metabolism
+00785  Lipoic acid metabolism
+00790  Folate biosynthesis
+00670  One carbon pool by folate
+00860  Porphyrin and chlorophyll metabolism
+00130  Ubiquinone and other terpenoid-quinone biosynthesis
+% Metabolism of terpenoids and polyketides
+00900  Terpenoid backbone biosynthesis
+00909  Sesquiterpenoid and triterpenoid biosynthesis
+00906  Carotenoid biosynthesis
+00903  Limonene and pinene degradation
+00281  Geraniol degradation
+00523  Polyketide sugar unit biosynthesis
+01054  Nonribosomal peptide structures
+% Biosynthesis of other secondary metabolites
+00311  Penicillin and cephalosporin biosynthesis
+00332  Carbapenem biosynthesis
+00261  Monobactam biosynthesis
+00521  Streptomycin biosynthesis
+00525  Acarbose and validamycin biosynthesis
+00401  Novobiocin biosynthesis
+00998  Biosynthesis of various secondary metabolites - part 2
+% Xenobiotics biodegradation and metabolism
+00362  Benzoate degradation
+00627  Aminobenzoate degradation
+00364  Fluorobenzoate degradation
+00625  Chloroalkane and chloroalkene degradation
+00361  Chlorocyclohexane and chlorobenzene degradation
+00623  Toluene degradation
+00622  Xylene degradation
+00633  Nitrotoluene degradation
+00643  Styrene degradation
+00791  Atrazine degradation
+00930  Caprolactam degradation
+00621  Dioxin degradation
+00626  Naphthalene degradation
+*** Genetic Information Processing
+% Transcription
+03020  RNA polymerase
+% Translation
+03010  Ribosome
+00970  Aminoacyl-tRNA biosynthesis
+% Folding, sorting and degradation
+03060  Protein export
+04122  Sulfur relay system
+03018  RNA degradation
+% Replication and repair
+03030  DNA replication
+03410  Base excision repair
+03420  Nucleotide excision repair
+03430  Mismatch repair
+03440  Homologous recombination
+03450  Non-homologous end-joining
+*** Environmental Information Processing
+% Membrane transport
+02010  ABC transporters
+02060  Phosphotransferase system (PTS)
+03070  Bacterial secretion system
+% Signal transduction
+02020  Two-component system
+*** Cellular Processes
+% Cellular community - prokaryotes
+02024  Quorum sensing
+% Cell motility
+02030  Bacterial chemotaxis
+02040  Flagellar assembly
+*** Human Diseases
+% Drug resistance: antimicrobial
+01501  beta-Lactam resistance
+01502  Vancomycin resistance
+01503  Cationic antimicrobial peptide (CAMP) resistance
