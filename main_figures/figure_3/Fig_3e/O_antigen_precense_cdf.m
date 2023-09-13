@@ -61,15 +61,23 @@ end
 
 disc_data = discretize(patient_samp_adjust,-.01:1:7.99);
 percent_LPS = arrayfun(@(x) mean(stop_codon(disc_data==x)), 1:8);
+sem = arrayfun(@(x) std(stop_codon(disc_data==x))/sqrt(sum(disc_data==x)) , 1:8);
+
 error_bar= zeros(2,8);
 
 for ii=1:8
     [phat,pci] = binofit(sum(stop_codon(disc_data==ii)==1),sum(disc_data==ii));
-    error_bar(2,ii) = phat - pci(1);
-    error_bar(1,ii) = pci(2) - phat;
+    %error_bar(2,ii) = phat - pci(1);
+    %error_bar(1,ii) = pci(2) - phat;
+    error_bar(2,ii) = pci(1);
+    error_bar(1,ii) = pci(2);
+
 end
 
 figure('Renderer', 'painters', 'Position', [10 10 300 300])
+%fill([1:8,1:8],[error_bar(2,:),fliplr(error_bar(1,:))],'r')
+fill([1:8,8:-1:1], [percent_LPS+sem, fliplr(percent_LPS-sem)],[211, 213, 212]./255)
+hold on
 plot(1:8, percent_LPS,'-k', 'LineWidth', 2)
 set(gca,'xtick',[])
 H=gca;

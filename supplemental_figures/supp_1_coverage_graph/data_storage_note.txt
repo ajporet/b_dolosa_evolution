@@ -1,0 +1,2 @@
+Note:
+The dataframe coveragematrix.mat is too large to be stored in Github and can be created through the script sample_processing/create_candidate_mutation_table/build_mutation_table_master_fast 
