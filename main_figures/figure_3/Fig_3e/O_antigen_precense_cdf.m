@@ -1,4 +1,6 @@
 clear; close all;
+% This script creates the graph should in figure 3e, as well as a
+% supplement graph from Fig S6. 
 
 % Get isolates with LPS mutations
 all_2011_mutations= readcell("Lieberman_et_al_2011_supp_table_2.xlsx");
@@ -67,16 +69,13 @@ error_bar= zeros(2,8);
 
 for ii=1:8
     [phat,pci] = binofit(sum(stop_codon(disc_data==ii)==1),sum(disc_data==ii));
-    %error_bar(2,ii) = phat - pci(1);
-    %error_bar(1,ii) = pci(2) - phat;
     error_bar(2,ii) = pci(1);
     error_bar(1,ii) = pci(2);
 
 end
 
 figure('Renderer', 'painters', 'Position', [10 10 300 300])
-%fill([1:8,1:8],[error_bar(2,:),fliplr(error_bar(1,:))],'r')
-fill([1:8,8:-1:1], [percent_LPS+sem, fliplr(percent_LPS-sem)],[211, 213, 212]./255)
+fill([1:8,8:-1:1], [percent_LPS+sem, fliplr(percent_LPS-sem)],[211, 213, 212]./255,'LineStyle','none')
 hold on
 plot(1:8, percent_LPS,'-k', 'LineWidth', 2)
 set(gca,'xtick',[])

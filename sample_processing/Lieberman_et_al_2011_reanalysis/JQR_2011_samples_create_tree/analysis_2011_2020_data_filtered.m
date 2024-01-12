@@ -153,7 +153,7 @@ sitetoparse = positions_to_show_in_table;
 
 % Uncomment the following three lines if there is an annotated genome
 annotations = annotate_mutations_gb(p2chrpos(p(positions_to_show_in_table),ChrStarts),REFGENOMEFOLDER) ;
-annotation_full= append_annotations(annotations, ancnti(positions_to_show_in_table), Calls(positions_to_show_in_table,:), counts(:,positions_to_show_in_table,:), hasmutation(positions_to_show_in_table,:), promotersize) ; %% adds information about particular mutations observed, based on
+%annotation_full= append_annotations(annotations, ancnti(positions_to_show_in_table), Calls(positions_to_show_in_table,:), counts(:,positions_to_show_in_table,:), hasmutation(positions_to_show_in_table,:), promotersize) ; %% adds information about particular mutations observed, based on
 %clickable_snp_table(annotation_full, Calls(sitetoparse,samples_to_show), counts(:,sitetoparse,samples_to_show), SampleNames(samples_to_show), ScafNames, MutQual(positions_to_show_in_table), QualSort);
 hasmutation=hasmutation(goodpos,:);
 

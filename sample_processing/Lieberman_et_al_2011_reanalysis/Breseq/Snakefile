@@ -89,5 +89,5 @@ rule compare_gd:
         module load c3ddb/R/3.2.3;
         module load c3ddb/bowtie2/2.2.6;
         module load c3ddb/breseq/0.30.0;
-        gdtools ANNOTATE -f HTML -o breseq_comparison.html -r dolosa_genome_02_21_20_download.gbff {input};
+        gdtools ANNOTATE -f HTML -o breseq_2011_full_table.html -r dolosa_genome_02_21_20_download.gbff {input};
         """
