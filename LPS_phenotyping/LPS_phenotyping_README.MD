@@ -1,4 +1,4 @@
-LPS Phenotyping: Notes 
+### LPS Phenotyping: Notes 
 
 During the process of visualizing B. dolosa’s O-antigen, we noticed that our expected phenotypes failed to match the genotypes of our samples. By resequencing our B. dolosa isolates, we found that labels in our freezer failed to correspond to the sample for some newly-sequenced samples. Sample labeling for isolates first described in Lieberman et al.’s prior work (Lieberman et al, 2011) were unaffected by this issue.
 
