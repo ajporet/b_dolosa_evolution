@@ -1,0 +1,127 @@
+clear all; close all;
+load JQR_b_dolosa_mutations.mat
+load cds_sorted.mat
+
+dictionary = readtable("Burkholderia_dolosa_AU0158_2968.xlsx"); 
+AK_nums_corrected = string(erase([dictionary.LocusTag],'"')); BDAG_nums = string(erase([dictionary.GeneSynonyns],'"')); 
+
+CDS_rearranged = squeeze(struct2cell([CDS{1},CDS{2},CDS{3}]))';
+CDS_AK_nums = string(CDS_rearranged(:,12)); 
+CDS_AK_old_nums = string(CDS_rearranged(:,11)); 
+CDS_WP_nums=(CDS_rearranged(:,6)); CDS_WP_nums(cellfun(@isempty, CDS_WP_nums))= {"NA"}; CDS_WP_nums = string(CDS_WP_nums);
+
+CDS_bdag_nums = [];
+for i =1:numel(CDS_AK_nums)
+     indice_dct = find(contains(dct_aks,CDS_AK_nums(i)));
+     if length(indice_dct)==0
+         CDS_bdag_nums = [CDS_bdag_nums,nan];
+         continue
+     else
+         CDS_bdag_nums  = [CDS_bdag_nums,dictionary{indice_dct,12}];
+     end
+ end
+
+breseq_table = readtable("Breseq_O_ant_results.xlsx",'ReadVariableNames', true);
+breseq_table_cols = breseq_table.Properties.VariableNames;
+breseq_samplenames = breseq_table_cols(12:end);
+replacements = ["J_","Q_","R";
+                "P02", "P06", "P07"];
+for i=1:3
+    breseq_samplenames = strrep(breseq_samplenames, replacements(1,i), replacements(2,i));
+end
+breseq_samplenames = strrep(breseq_samplenames,"_","-");
+
+
+sample_names_cleaned = SampleNames(samplestoplot);
+hasmutation_cleaned = hasmutation(:,samplestoplot);
+P067_sample_names = sample_names_cleaned(contains(sample_names_cleaned,["P06","P07"]));
+
+% Define LPS-affecting muts from manual inspection of data 
+LPS_muts= [50, 164, 188, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 265, 438,186, 187, 201];
+LPS_stop_codon_mut = 189;
+
+% Define present and mutant LPS
+P02_present_LPS= ~hasmutation_cleaned(LPS_stop_codon_mut,contains(sample_names_cleaned,"P02"));
+P067_mutant_LPS = hasmutation_cleaned(LPS_muts,contains(sample_names_cleaned,["P06","P07"]));
+P067_mutant_LPS = (sum(P067_mutant_LPS,1)>0)' | contains(P067_sample_names, has_an_LPS_indel);
+
+columns_to_care_about = [2,3,5,6,12,34];
+annotation_full_cell = squeeze(struct2cell(annotation_full))';
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+table_of_LPS_muts = {"chr","pos","name","wp","ak","mut","affected samples","hasp6p7"};
+for i=1:numel(LPS_muts)
+    lps_mut = LPS_muts(i);
+    affected_samples = sample_names_cleaned(hasmutation_cleaned(lps_mut,:)>0);
+    has_p67 = sum(contains(affected_samples,["P06","P07"]))>0;
+    mut_anno = annotation_full_cell(lps_mut,columns_to_care_about);
+
+    table_of_LPS_muts = [table_of_LPS_muts;[mut_anno,{affected_samples},has_p67]];
+end
+
+table_of_LPS_muts = [table_of_LPS_muts, cellstr(repmat("SNV",size(table_of_LPS_muts,1),1))];
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Now deal with indels 
+% breseq_table = readtable("Breseq_O_ant_results.xlsx",'ReadVariableNames', true);
+% breseq_table_cols = breseq_table.Properties.VariableNames;
+
+% true_LPS_indels=  Breseq_Vals_cleaned([6,10:21],:);
+table_of_LPS_indels = {"chr","pos","name","wp","ak","mut","affected samples","hasp6p7"};
+for i=1:numel(size(breseq_table,1))
+    ak_num = split(breseq_table{i,5}{:}," ");
+    ak_num = ak_num{1};
+    ind_in_cds = find(strcmp(ak_num,CDS_AK_old_nums));
+
+    bdag_num = CDS_bdag_nums(ind_in_cds);
+    akrs_num  = CDS_AK_nums(ind_in_cds);
+    wp_num = CDS_WP_nums(ind_in_cds);
+
+
+    table_col = table2array(breseq_table(i,12:end));
+    in_samples = breseq_samplenames(table_col==1);
+    has_p67 = sum(contains(in_samples,["P06","P07"]))>0;
+
+    new_row = ["2",breseq_table{i,2},breseq_table{i,2},wp_num,akrs_num,breseq_table{3,i},{in_samples},has_p67];
+
+
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+dictionary = readtable("Burkholderia_dolosa_AU0158_2968.xlsx"); 
+AK_nums_corrected = string(erase([dictionary.LocusTag],'"')); BDAG_nums = string(erase([dictionary.GeneSynonyns],'"')); 
+
+% We also use cds_sorted.mat, a matrix of gene annotations created from the
+% gb files NZ_CP009793.1, NZ_CP009794.1, and NZ_CP009795.1. We use AK
+% numbers, WP numbers, and annotations from here
+CDS_rearranged = squeeze(struct2cell([CDS{1},CDS{2},CDS{3}]))';
+CDS_AK_nums = string(CDS_rearranged(:,12)); CDS_WP_nums=(CDS_rearranged(:,6)); CDS_WP_nums(cellfun(@isempty, CDS_WP_nums))= {"NA"}; CDS_WP_nums = string(CDS_WP_nums);
+gene_annotations=(CDS_rearranged(:,3)); gene_annotations(cellfun(@isempty, gene_annotations))= {"NA"}; doubled_gene_annos = cellfun(@(x) size(x,1)>1, gene_annotations);
+gene_annotations(doubled_gene_annos) = cellfun(@(x) {erase(strjoin(string(x)," "),"  ")},gene_annotations(doubled_gene_annos));
+gene_annotations = string(gene_annotations);
+
+% Get all protein annotations for basic, non-intergenic genes (i.e AK
+% number, WP number, and description) 
+protein_annotations = annotation_full_cell(single_gene_entries==1,[5, 6, 12]);
+protein_annotations((cellfun(@isempty,protein_annotations))) = {""};
+
+% Translate basic, non-intergenic AK numbers into BDAG numbers
+BDAG_numbers = cellfun(@(x) BDAG_nums(AK_nums_corrected==x) , protein_annotations(:,3), 'UniformOutput' , false);
+BDAG_numbers((cellfun(@isempty,BDAG_numbers))) = {"NA"};
+BDAG_numbers(cellfun(@(x) strcmpi(x,""), BDAG_numbers)) = {"NA"};
+
+% akrs_nums = [];
+% akshort_nums = [];
+% bdag_nums = [];
+% for i =1:numel(CDS_WP_nums)
+%     indice_dct = find(contains(dct_aks,CDS_AK_nums(i)));
+% 
+%     if length(indice_dct)==0
+%         akrs_nums = [akrs_nums,nan];
+%         bdag_nums = [bdag_nums,nan];
+%         akrs_nums = [akrs_nums,nan];
+%         continue
+%     else
+%         akrs_nums = [akrs_nums,dictionary{indice_dct,6}];
+%         bdag_nums  = [bdag_nums,dictionary{indice_dct,12}];
+%         akrs_nums = [bdag_nums,dictionary{indice_dct,12}];
+%     end
+% end

@@ -27,6 +27,8 @@ chr_3_locs = [[390152; 391118], [476546; 477761]]';
 
 buffer_range = 10000;
 mutated_unit = [2443640,2474542]; mutated_unit(1) = mutated_unit(1)-buffer_range;mutated_unit(2) = mutated_unit(2)+buffer_range;
+%mutated_unit = [2431102,2475335]; mutated_unit(1) = mutated_unit(1)-buffer_range;mutated_unit(2) = mutated_unit(2)+buffer_range;
+
 chr_2_locs = [chr_2_locs; mutated_unit];
 
 [~,idx_1] = sort(chr_1_locs(:,1)); chr_1_locs = chr_1_locs(idx_1,:);

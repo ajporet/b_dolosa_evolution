@@ -57,4 +57,4 @@ Similar to “main\_figures”, the code needed to produce each supplementary fi
 
 ## Supplemental\_tables<a id="supplemental_tables"></a>
 
-Scripts used to produce supplementary tables S3, S4, S5, S8, and S9 are included here, as well as a copy of the supplemental tables published in Poret et al. 
+Scripts used to produce large supplementary tables are included here, as well as a copy of the supplemental tables published in Poret et al. 

@@ -1,0 +1,28 @@
+LPS Phenotyping: Notes 
+
+During the process of visualizing B. dolosa’s O-antigen, we noticed that our expected phenotypes failed to match the genotypes of our samples. By resequencing our B. dolosa isolates, we found that labels in our freezer failed to correspond to the sample for some newly-sequenced samples. Sample labeling for isolates first described in Lieberman et al.’s prior work (Lieberman et al, 2011) were unaffected by this issue.
+
+To rectify this, we re-sequenced our phenotyped isolates and other randomly chosen samples using various Illumina technologies. These isolates were drawn majorly from patient Q and R’s samples and were further taken from two types of storage: shallow, 200 ul 96-well plates and 2 ml deep well plates where B. dolosa colonies were first cultured from single colonies. A total of 83 isolates were resequenced consisting of 73 unique samples; all isolates shown in Figure 3 have been resequenced. 
+
+To compare resequenced isolates to those original 931 genotypes, we use the same methods described in “Mutation detection and phylogenetic inference”, changing the following parameters: samples with a mean candidate SNV coverage of 5x (previously <12x) across candidate positions were discarded, SNV positions were removed if they had a median depth of coverage across samples of <20x (previously <40x), and ambiguity was defined as having a per-strand coverage of less than 10x (previously 12x). Additionally, no samples were removed based on the total number of ambiguous bases (N’s). These looser parameters ensured that lower coverage, resequenced isolates could pass these filters without intensive script modification. 
+
+In this repository, we label all gels with their “original” isolate label; the correspondent resequencing of that isolate is labeled as the same name with an “_” prefix. For example, the isolate “P07SP-v203_resequenced_2” is the resequenced version of the isolate labeled as “P07SP-v203” in our freezer. Of the 83 isolates resequenced, all but 10 directly match an original sample. Of these 9, 2 discrepancies can be explained by errant SNVs called at position 3141747 on chromosome 1, which falls in a difficult-to-sequence repetitive region of CGTGTC, CGTGGC, and CGTGC motifs. Besides this SNV, these resequenced isolates are otherwise isogenic to another sequence. Of the remaining 7 samples, 2 furthermore contain mutation discrepancies caused by low read count, where a single position with 1 read differs from a well-covered base call in an otherwise isogenic sample. The remaining 5 samples differ from an otherwise isogenic sample by 1 SNV (3 sequences) or 2 SNVs (2 sequences) after removing all low-coverage positions or errant SNVs called at position 3141747 on chromosome 1. These discrepant SNVs are all well-covered and do not appear to result from spotty sequencing. It is possible these isolates could represent clones filtered out from our final phylogeny as well as de novo mutations that occurred during culturing. None of these mutations fall in LPS-affecting genes and none of these isolates were included in Figure 3c. 
+
+In the tree of resequenced isolates located in the resequencing_isolates folder, we additionally include resequencing of isolates with a lacZ insert, as well as the samples “Bdolosa_small_colony” and “Bdolosa_large_colony,” two unique morphologies of B. dolosa that appeared during an undocumented experiment that passaged B. dolosa multiple times. We additionally note that 1 extra nonsynonymous SNV was found in “P06SP-v101_lacZ”, which underwent a lacZ cassette insertion as described in “Creation of lacZ mutant B. dolosa strains”. 
+
+Interestingly, all mislabeling errors within subjects Q and R were confined to the same subject and sampling time point. In explanation, an isolate originally attributed to subject R at 16 months was always found to match another isolate from subject R at 16 months. As such, we do not expect our experimental findings to be influenced by this labeling error. 
+
+A description of the labeling scheme used in this tree is included below. Note: unless otherwise noted, all samples were drawn from 200ul 96-well plates, the common form of sample storage from this project. 
+
+Batch 1 - mapping is summarized in resequencing_g_1:
+This sequencing run contains the “small” and “large” colonies that appeared during a separate experiment that involved passing B. dolosa <5x. These are labeled as “Bdolosa_small_colony” and “Bdolosa_large_colony”
+
+Batch 2 - mapping is summarized in resequencing_g_2:
+This sequencing batch contains the first major round of re-sequencing. Samples are either labeled with the prefix “_new_seq” or “_flipped” (denoting a sample whose barcodes had accidentally become flipped during sequencing preparation). 
+
+Batch 3 - mapping is summarized in resequencing_g_3:
+This sequencing batch contains the resequencing of isolates P07SP-v317, P06SP-v103, P06SP-v201, and P06SP-v101. Of these, P07SP-v317 and P06SP-v103 are used in our murine experiments. These are labeled as '_unaltered' (i.e unmodified isolates) or ‘_lacZ' (isolates with a lacZ insert). 
+
+Batch 3 - mapping is summarized in resequencing_g_4:
+This sequencing batch contains the second round of re-sequencing. These samples are labeled in four forms: “_first_resequenced_1_5” indicates a resequencing of an isolate previously sampled in batch 2 that failed in DNA preparation or was sequenced at low coverage, “_resequenced_2” a new sampled pulled for investigation, “_repulled” a designation for a sample that had previously undergone bespoke analysis, and “_deep_well” a sample pulled from the aforementioned 2 ml storage plates. 
+

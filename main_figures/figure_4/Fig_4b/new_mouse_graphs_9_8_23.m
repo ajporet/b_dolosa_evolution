@@ -16,7 +16,7 @@ third_color = [190,190,190]./255;
 % colors_list = {first_color,second_color,third_color}; old color list
 colors_list = {first_color+.2,second_color+.15,third_color+.1}; 
 
-
+matched_samples = {};
 for ii=1:length(sheet_names)
     counts= readtable(file_name,'Sheet',sheet_names{ii}, NumHeaderLines=1);
 
@@ -44,7 +44,6 @@ for ii=1:length(sheet_names)
     disp("Fold change: " + bar_means(2)/bar_means(1))
     bargraph.EdgeColor = 'none';
 
-
     bargraph.CData = colors_list{ii};
 
 
@@ -54,6 +53,11 @@ for ii=1:length(sheet_names)
     hold on
     scatter(repelem(bar_locs(ii,:),5,1),scatter_points(6:10,:),'k','filled','s');
     hold on
+
+    disp("Source data display")
+    disp(ii)
+    disp(scatter_points(1:5,:))
+    disp(scatter_points(6:10,:))
 
     con_ints = arrayfun(@(x) confidence_int(scatter_points(:,x)), [1:2], 'UniformOutput', false);
     upper_bound = arrayfun(@(x) con_ints{x}(1), 1:2) - bar_means;
@@ -65,8 +69,11 @@ for ii=1:length(sheet_names)
     disp(sheet_names{ii})
     %disp("Day 1 Wilcoxen ranksum: " + ranksum(scatter_points(:,1),scatter_points(:,2)))
     disp("Day 7 Wilcoxen ranksum: " + ranksum(scatter_points(:,1),scatter_points(:,2)))
-
+    [~,ttest_res] = ttest(d7_means(:,1),d7_means(:,2));
+    disp("D7 paired T tes: " + ttest_res)
+    disp(' ')
     hold on
+
 end
     
 

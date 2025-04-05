@@ -1,0 +1,1 @@
+Please see source data file that accompanies manuscript. Alternatively, please see the "raw_images" folder. The file name K.#.JPG denotes a plate with # mg/ml kanamycin concentration. The plates shown in C1.JPG and C2.JPG are controls with no kanamycin added.

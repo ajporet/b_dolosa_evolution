@@ -1,0 +1,83 @@
+clear all; close all; 
+uptake_6 = readtable("antibiotic_incubation_macrophage.xlsx",'ReadVariableNames', false);
+sample_order = ["P07SP-v311 (O-) 8.45E5","P07SP-v207 (O+) 1.01E6","P07SP-v311 (O-) 1.69E6","P07SP-v207 (O+) 2.02E6"];
+% Use the first two columns - closest innoc match 
+
+
+
+trial_1_v311 = table2array(uptake_6(1:4,3:5));
+trial_1_v207 = table2array(uptake_6(1:4,6:8));
+
+trial_2_v311 = table2array(uptake_6(6:9,3:5));
+trial_2_v207 = table2array(uptake_6(6:9,6:8));
+
+species = ["v311","v207"];
+times = [1,2,4,6];
+
+figure('Renderer', 'painters', 'Position', [10 10 200*2 150*2])
+
+trial_marker = ["diamond","o"];
+actual_data = {{trial_1_v311,trial_1_v207},{trial_2_v311,trial_2_v207}};
+for ii = 1:2
+    trial_m = trial_marker(ii);
+    data = actual_data{ii};
+    
+    lacz_mut_color = "#E48D70";lac_wt_color = "#87C7C3";
+    lacz_mut_color_edge = "#8A5543";lac_wt_color_edge = "#57807D";
+
+    
+    count = 0;
+    for i=1:2
+        count =count + 1;
+        if contains(species(i),"v207")
+            col = lac_wt_color;
+            edge_col = lac_wt_color_edge;
+            disp('y')
+        else
+            col = lacz_mut_color;
+            edge_col = lacz_mut_color_edge;
+            disp('n')
+        end
+    
+        x = repmat(times, 3, 1)';
+        y= data{i}./mean(data{i}(1,:));
+
+        scatter(x,y,trial_m,'SizeData',40,'MarkerFaceColor',col,'MarkerEdgeColor',edge_col,'LineWidth',1.5);
+        hold on
+    end
+end    
+
+hold on
+
+new_data_2 = {[],[]};
+for i=1:2
+    trial_1 = actual_data{1}{i};
+    trial_2 = actual_data{2}{i};
+
+
+    y = [trial_1./mean(trial_1(1,:)),trial_2./mean(trial_2(1,:))]';
+    new_data_2(i)= {y};
+
+    if contains(species(i),"207")
+        col = lac_wt_color;
+    else
+        col = lacz_mut_color;
+    end
+
+    plot(times, median(y,1),"-_",'Color',col,'LineWidth',2,'MarkerSize', 20);
+    %SEM = std(y)/sqrt(size(y,1)); % Standard Error Of The Mean
+%     hold on
+%     errorbar(times,mean(y,1),SEM,'Color',col,'LineWidth',2);
+end
+set(gca, 'LineWidth',3)
+box off;set(gca,'TickDir','out');
+set(gca,'XTick',times)
+box off;set(gca,'TickDir','out');
+set(gca,'fontsize',18)
+xlim([.5,6.5])
+
+time_stats = zeros(1,4);
+for i=1:4
+    p = ranksum(new_data_2{1}(:,i),new_data_2{2}(:,i));
+    time_stats(:,i)= p;
+end

@@ -1,0 +1,9 @@
+Batch,Lane,Barcode,Sample,Alignments,ProviderName
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SPv103_unaltered,Bdolosa_new,P06SPv103_unaltered
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SPv101_unaltered,Bdolosa_new,P06SPv101_unaltered
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SP201_unaltered,Bdolosa_new,P06SP201_unaltered
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P07SPv317_unaltered,Bdolosa_new,P07SPv317_unaltered
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SPv103_lacZ,Bdolosa_new,P06SPv103_lacZ
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SPv101_lacZ,Bdolosa_new,P06SPv101_lacZ
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P06SP201_lacZ,Bdolosa_new,P06SP201_lacZ
+/scratch/mit_lieberman/projects/gga_bdelosa/06_30_21_lacZ_sequencing/concat_fastqs,-1,AAAAAA,P07SPv317_lacZ,Bdolosa_new,P07SPv317_lacZ

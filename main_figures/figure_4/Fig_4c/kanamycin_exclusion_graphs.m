@@ -38,6 +38,9 @@ for item = file_names
     
     hold on
     scatter(locations,percent_of_total(:,reorder),dot_size,'filled','k') 
+
+    disp(file_names)
+    disp(percent_of_total(:,reorder))
     
     box off;set(gca,'TickDir','out');
     set(gca,'xtick',[])
