@@ -2,8 +2,10 @@ This repository contains the code and analyses used in:
 
 
 ### “De novo mutations mediate phenotypic switching in an opportunistic human lung pathogen ”<a id="de-novo-mutations-mediate-phenotypic-switching-in-an-opportunistic-human-lung-pathogen-"></a>
+10.1038/s41467-025-61168-4
+Nature Communications 
 
-Alexandra J. Poret, Matthew Schaefers, Christina Merakou, Kathryn E. Mansour, Georgia K. Lagoudas, Ashley R. Cross, Joanna B. Goldberg, Roy Kishony, Ahmet Z. Uluer, Alexander J. McAdam, Paul C. Blainey, Sara O. Vargas, Tami D. Lieberman^, Gregory P. Priebe^ (^co-senior authors)
+Alexandra J. Poret, Matthew Schaefers, Christina Merakou, Kathryn E. Mansour, Connor D. Ahern, Georgia K. Lagoudas, Alyssa Haynes, Ashley R. Cross7, Joanna B. Goldberg, Roy Kishony, Ahmet Z. Uluer, Alexander J. McAdam, Paul C. Blainey, Sara O. Vargas, Tami D. Lieberman^, Gregory P. Priebe^ (^co-senior authors)
 
 
 # Data description:<a id="data-description"></a>
